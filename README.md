@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏆 Dashboard de Apostas Desportivas
 
-## Getting Started
+Uma interface de utilizador (UI) moderna, responsiva e de alta performance para uma plataforma de apostas desportivas. O projeto foi desenhado com foco na experiência do utilizador, oferecendo navegação intuitiva, atualizações em tempo real (simuladas) e um design profissional.
 
-First, run the development server:
+Este Front-end foi construído para ser o "rosto" de uma aplicação que consumirá dados da **BetsAPI**, estando todos os seus componentes previamente estruturados para receber os dados dinâmicos do Back-end.
+
+## 🚀 Tecnologias Utilizadas
+
+* **Framework:** [Next.js](https://nextjs.org/) (App Router)
+* **Biblioteca UI:** [React](https://reactjs.org/)
+* **Estilização:** [Tailwind CSS](https://tailwindcss.com/)
+* **Linguagem:** TypeScript / JavaScript
+
+## ✨ Funcionalidades Principais
+
+* **📱 Design Responsivo:** Interface adaptável a diferentes tamanhos de ecrã (Mobile, Tablet e Desktop).
+* **⚽ Placar ao Vivo:** Acompanhamento de jogos a decorrer, com indicadores de tempo, golos e estatísticas dinâmicas.
+* **📅 Próximos Jogos:** Lista de eventos futuros com mercados de apostas tradicionais (1x2) e escudos dinâmicos das equipas.
+* **🤖 Analista de IA:** Componente inovador que simula uma Inteligência Artificial a fornecer dicas e previsões de apostas baseadas em estatísticas.
+* **🔥 Apostas Populares:** Destaque para as cotações (odds) mais atrativas do momento.
+* **🌍 Ligas Globais:** Barra lateral de navegação rápida pelas ligas de futebol mais populares (com bandeiras carregadas via CDN).
+
+## 📂 Estrutura de Ficheiros (Componentes)
+
+A arquitetura do Front-end foi modularizada para facilitar a manutenção e a integração:
 
 ```bash
+├── app/
+│   ├── components/
+│   │   ├── AiAnalysis.tsx      # Dicas de apostas geradas por IA
+│   │   ├── Footer.tsx          # Rodapé com links legais e licenças
+│   │   ├── Header.tsx          # Navegação superior e autenticação
+│   │   ├── HeaderBanner.tsx    # Banner de destaque (ex: Champions League)
+│   │   ├── PlacarAoVivo.tsx    # Dashboard do jogo ao vivo
+│   │   ├── PopularBets.tsx     # Lista de apostas em alta
+│   │   ├── ProximosJogos.tsx   # Lista de jogos futuros e odds (1x2)
+│   │   └── Sidebar.tsx         # Menu lateral com ligas populares
+│   ├── layout.tsx              # Layout base do Next.js
+│   ├── page.tsx                # Página principal agregando os componentes
+│   └── globals.css             # Estilos globais e variáveis de cor
+⚙️ Como correr o projeto localmente
+Clone o repositório:
+
+Bash
+git clone [https://github.com/seu-utilizador/seu-repositorio.git](https://github.com/seu-utilizador/seu-repositorio.git)
+Entre na pasta do projeto:
+
+Bash
+cd seu-repositorio
+Instale as dependências:
+
+Bash
+npm install
+# ou
+yarn install
+Inicie o servidor de desenvolvimento:
+
+Bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Abra o seu navegador e aceda a http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🔗 Integração com o Back-end (BetsAPI)
+Este Front-end foi propositadamente construído com dados simulados (mockados) que imitam exatamente a estrutura JSON devolvida pela BetsAPI.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Para a equipa de Back-end:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Os IDs das partidas (ex: p1, p2) devem ser substituídos pelos IDs reais gerados pela API.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+As imagens das equipas/ligas já estão configuradas para procurar os ficheiros diretamente no CDN da API (ex: https://assets.b365api.com/images/team/m/{image_id}.png). Se o image_id falhar, existe um fallback inteligente na UI que gera a sigla da equipa.

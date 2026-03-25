@@ -6,10 +6,10 @@ export default function AiAnalysis() {
   return (
     <div className="bg-bg-panel rounded-xl border border-border-color overflow-hidden flex flex-col relative shadow-lg">
       
-      {/* Linha de gradiente no topo simulando um brilho tecnológico */}
+      
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-text-green"></div>
       
-      {/* Cabeçalho da IA */}
+      
       <div className="bg-bg-accent/40 p-4 flex items-center space-x-3 border-b border-border-color">
         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center shadow-lg shrink-0">
           <span className="text-white text-xs">🤖</span>
@@ -17,7 +17,7 @@ export default function AiAnalysis() {
         <div>
           <h2 className="font-bold text-sm text-white flex items-center gap-2">
             IA Analista Esportiva
-            {/* Pontinho verde piscando simulando que a IA está "online" */}
+            
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-text-green opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-text-green"></span>
@@ -27,10 +27,9 @@ export default function AiAnalysis() {
         </div>
       </div>
 
-      {/* Corpo da Análise */}
+      
       <div className="p-4 space-y-4">
         
-        {/* Texto da IA (Pode vir do Back-end no futuro) */}
         <p className="text-sm text-text-secondary leading-relaxed">
           Analisando os últimos 50 jogos da <strong className="text-white">Champions League</strong>, nossos modelos indicam que o <strong className="text-blue-400">Manchester City</strong> tem 42% de chance de título devido ao seu controle de posse no meio-campo (68% de média). 
         </p>
@@ -39,7 +38,7 @@ export default function AiAnalysis() {
           No entanto, a eficiência de contra-ataque do <strong className="text-yellow-500">Real Madrid</strong> cresceu 18% nesta fase de mata-mata. Um confronto direto favorece jogos abertos.
         </p>
 
-        {/* Card de Dica de Aposta da IA */}
+
         <div className="bg-bg-input rounded-lg p-3 border border-purple-500/30 relative overflow-hidden group cursor-pointer hover:border-purple-500/60 transition-colors">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           

@@ -50,7 +50,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Seção de Textos Legais Adicionada Abaixo */}
+
       <div className="max-w-6xl mx-auto mt-8 pt-8 border-t border-border-color text-xs text-text-secondary/80 text-center space-y-4">
         <p>
           Jogue com responsabilidade! Jogue de forma consciente e racional, leia todas as informações disponíveis em nossa seção de Jogo Responsável.

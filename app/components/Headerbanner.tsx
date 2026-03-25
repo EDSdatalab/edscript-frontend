@@ -15,11 +15,7 @@ export default function HeaderBanner() {
         </p>
       </div>
       
-      {/* A SOLUÇÃO: 
-        1. Removemos a largura fixa da div.
-        2. Usamos 'h-32 w-auto' na imagem para ela manter a proporção original sem cortar.
-        3. Colocamos o 'rounded-2xl' diretamente na imagem.
-      */}
+
       <div className="relative z-10 flex items-center justify-center">
         <img 
             src="/logo-champ.png" 

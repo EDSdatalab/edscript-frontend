@@ -5,7 +5,7 @@ export default function Header() {
     
     <header className="h-16 bg-bg-panel text-white flex items-center justify-between px-4 lg:px-6 shrink-0 z-20 border-b border-border-color">
       
-      {/* Logo */}
+
       <div className="flex items-center space-x-4">
         <div className="flex items-center cursor-pointer">
           <img 
@@ -16,7 +16,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Navegação Central */}
+
       <nav className="flex-1 px-8 overflow-x-auto no-scrollbar">
         <ul className="flex items-center space-x-6 text-sm font-medium text-text-secondary whitespace-nowrap">
           
@@ -79,7 +79,7 @@ export default function Header() {
         </ul>
       </nav>
 
-      {/* Botões da Direita */}
+
       <div className="flex items-center justify-end space-x-5 text-text-secondary">
         <button className="hover:text-white transition-colors">
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

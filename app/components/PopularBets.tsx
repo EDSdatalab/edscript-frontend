@@ -3,15 +3,13 @@
 import React from 'react';
 
 export default function PopularBets() {
-  // Estrutura mockada (fictícia) baseada no retorno padrão da BetsAPI
-  // O seu Back-end vai enviar algo exatamente com este formato:
+
   const apostasPopulares = [
     {
       id: '3344556',
       league: { name: 'UEFA Champions League', cc: 'eu' },
-      home: { name: 'Manchester City', image_id: '17' }, // O image_id vem da BetsAPI
+      home: { name: 'Manchester City', image_id: '17' }, 
       away: { name: 'Real Madrid', image_id: '137' },
-      // O Back-end já envia a odd em destaque para facilitar no Front
       highlighted_odd: { label: 'Vencedor (Casa)', value: '1.30' } 
     },
     {
@@ -23,7 +21,7 @@ export default function PopularBets() {
     }
   ];
 
-  // Função auxiliar: Se a equipa não tiver escudo (image_id), criamos uma sigla com as iniciais
+  
   const gerarSigla = (nome: string) => {
     const palavras = nome.split(' ');
     if (palavras.length > 1) return (palavras[0][0] + palavras[1][0]).toUpperCase();
@@ -32,18 +30,18 @@ export default function PopularBets() {
 
   return (
     <div className="bg-bg-panel rounded-xl border border-border-color overflow-hidden">
-      {/* Cabeçalho */}
+
       <div className="bg-bg-accent p-3 flex justify-between items-center border-b border-border-color cursor-pointer">
         <h2 className="font-semibold text-sm text-white">Apostas Populares</h2>
       </div>
       
-      {/* Lista de Apostas */}
+
       <div className="p-2 space-y-2">
         {apostasPopulares.map((aposta) => (
           <div key={aposta.id} className="flex items-center justify-between p-2 hover:bg-bg-input rounded transition-colors cursor-pointer group">
             
             <div className="flex items-center space-x-3">
-              {/* Escudo da Equipa da Casa (Puxando da BetsAPI ou usando Sigla) */}
+
               <div className="w-8 h-8 rounded-full bg-bg-main border border-border-color flex items-center justify-center overflow-hidden shrink-0">
                 {aposta.home.image_id ? (
                   <img 
@@ -60,7 +58,7 @@ export default function PopularBets() {
                 )}
               </div>
               
-              {/* Nomes das Equipas */}
+
               <div className="text-xs">
                 <p className="text-text-primary font-medium">
                   {aposta.home.name} <span className="text-text-secondary font-normal">vs</span>
@@ -69,7 +67,7 @@ export default function PopularBets() {
               </div>
             </div>
 
-            {/* Odd (Cotação) */}
+
             <div className="flex flex-col items-end">
               <span className="bg-bg-input px-3 py-1.5 rounded text-text-green font-bold group-hover:bg-bg-accent border border-border-color transition-colors">
                 {aposta.highlighted_odd.value}

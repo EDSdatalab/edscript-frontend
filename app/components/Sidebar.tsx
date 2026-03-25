@@ -1,9 +1,9 @@
-"use client"; // Esta linha resolve o erro magicamente!
+"use client"; 
 
 import React from 'react';
 
 export default function Sidebar() {
-  // Array fictício simulando exatamente o que a BetsAPI devolve
+
   const ligasPopulares = [
     { id: '1', nome: 'Champions League', cc: 'eu' }, 
     { id: '2', nome: 'Premier League', cc: 'gb-eng' }, 
