@@ -3,21 +3,23 @@
 import React from 'react';
 
 export default function PlacarAoVivo() {
-
+  
   const jogo = {
     tempo: "78:20",
-    timeCasa: "Real Madrid",
-    imageCasaId: "137", 
+    timeCasa: "Sport Recife",
+    
+    pathFotoCasa: "/sport.png", 
     golsCasa: 2,
-    timeFora: "Manchester City",
-    imageForaId: "17", 
-    golsFora: 2,
-    estadio: "Santiago Bernabéu",
-    posseBola: { casa: 45, fora: 55 },
-    chutes: { casa: 12, fora: 15 }
+    timeFora: "Santa Cruz",
+    
+    pathFotoFora: "/santa.png",
+    golsFora: 1,
+    estadio: "Ilha do Retiro",
+    posseBola: { casa: 58, fora: 42 },
+    chutes: { casa: 14, fora: 9 }
   };
 
-
+  
   const gerarSigla = (nome: string) => {
     const palavras = nome.split(' ');
     if (palavras.length > 1) return (palavras[0][0] + palavras[1][0]).toUpperCase();
@@ -27,7 +29,7 @@ export default function PlacarAoVivo() {
   return (
     <div className="bg-bg-card border border-border-color rounded-xl p-6 shadow-lg mb-6">
      
-
+      
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center space-x-2 bg-bg-main px-3 py-1 rounded-full border border-border-color">
           <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
@@ -40,16 +42,18 @@ export default function PlacarAoVivo() {
         </div>
       </div>
 
- 
+      
       <div className="flex justify-between items-center mb-8 px-2 md:px-8">
         
-
+        
         <div className="flex flex-col items-center space-y-3 w-1/3">
           <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-bg-main flex items-center justify-center overflow-hidden shadow-md border border-border-color">
             <img 
-              src={`https://assets.b365api.com/images/team/m/${jogo.imageCasaId}.png`} 
+              
+              src={jogo.pathFotoCasa} 
               alt={jogo.timeCasa}
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
+              
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.parentElement!.innerHTML = `<span class="text-xl md:text-2xl font-black text-text-secondary">${gerarSigla(jogo.timeCasa)}</span>`;
@@ -59,7 +63,7 @@ export default function PlacarAoVivo() {
           <span className="font-semibold text-sm md:text-lg text-center text-text-primary">{jogo.timeCasa}</span>
         </div>
 
-
+        
         <div className="flex items-center space-x-3 md:space-x-6 w-1/3 justify-center">
           <div className="text-4xl md:text-6xl font-black bg-bg-main text-white px-4 md:px-6 py-2 md:py-4 rounded-lg shadow-inner border border-border-color">
             {jogo.golsCasa}
@@ -70,11 +74,12 @@ export default function PlacarAoVivo() {
           </div>
         </div>
 
-
+        
         <div className="flex flex-col items-center space-y-3 w-1/3">
           <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-bg-main flex items-center justify-center overflow-hidden shadow-md border border-border-color">
             <img 
-              src={`https://assets.b365api.com/images/team/m/${jogo.imageForaId}.png`} 
+              
+              src={jogo.pathFotoFora} 
               alt={jogo.timeFora}
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
               onError={(e) => {
@@ -87,12 +92,12 @@ export default function PlacarAoVivo() {
         </div>
       </div>
 
-
+      
       <div className="border-t border-border-color pt-5 mt-2">
         <h4 className="text-text-secondary text-xs uppercase tracking-widest mb-4 text-center">Termômetro da Partida</h4>
         
         <div className="space-y-4 max-w-md mx-auto">
-
+          
           <div>
             <div className="flex justify-between text-xs mb-1.5">
               <span className="font-bold text-white">{jogo.posseBola.casa}%</span>
@@ -100,12 +105,12 @@ export default function PlacarAoVivo() {
               <span className="font-bold text-white">{jogo.posseBola.fora}%</span>
             </div>
             <div className="w-full flex h-2 rounded-full overflow-hidden bg-bg-main">
-              <div className="bg-blue-500 h-full" style={{ width: `${jogo.posseBola.casa}%` }}></div>
-              <div className="bg-indigo-500 h-full" style={{ width: `${jogo.posseBola.fora}%` }}></div>
+              <div className="bg-red-600 h-full" style={{ width: `${jogo.posseBola.casa}%` }}></div>
+              <div className="bg-gray-400 h-full" style={{ width: `${jogo.posseBola.fora}%` }}></div>
             </div>
           </div>
           
-
+          
           <div>
             <div className="flex justify-between text-xs mb-1.5">
               <span className="font-bold text-white">{jogo.chutes.casa}</span>
@@ -113,8 +118,8 @@ export default function PlacarAoVivo() {
               <span className="font-bold text-white">{jogo.chutes.fora}</span>
             </div>
             <div className="w-full flex h-2 rounded-full overflow-hidden bg-bg-main">
-              <div className="bg-blue-500 h-full" style={{ width: `${(jogo.chutes.casa / (jogo.chutes.casa + jogo.chutes.fora)) * 100}%` }}></div>
-              <div className="bg-indigo-500 h-full" style={{ width: `${(jogo.chutes.fora / (jogo.chutes.casa + jogo.chutes.fora)) * 100}%` }}></div>
+              <div className="bg-red-600 h-full" style={{ width: `${(jogo.chutes.casa / (jogo.chutes.casa + jogo.chutes.fora)) * 100}%` }}></div>
+              <div className="bg-gray-400 h-full" style={{ width: `${(jogo.chutes.fora / (jogo.chutes.casa + jogo.chutes.fora)) * 100}%` }}></div>
             </div>
           </div>
         </div>

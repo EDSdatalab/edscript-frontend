@@ -1,124 +1,88 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function ProximosJogos() {
 
-  const jogos = [
-    {
-      id: 'p1',
-      dataHora: 'Hoje, 16:00',
-      campeonato: 'UEFA Champions League',
-      casa: { nome: 'PSG', image_id: '24' },
-      fora: { nome: 'Barcelona', image_id: '81' },
-      odds: { casa: '2.10', empate: '3.50', fora: '3.20' }
-    },
-    {
-      id: 'p2',
-      dataHora: 'Amanhã, 16:00',
-      campeonato: 'UEFA Champions League',
-      casa: { nome: 'Atlético Madrid', image_id: '15' },
-      fora: { nome: 'Borussia Dortmund', image_id: '19' },
-      odds: { casa: '1.80', empate: '3.60', fora: '4.50' }
-    },
-    {
-      id: 'p3',
-      dataHora: 'Hoje, 20:00',
-      campeonato: 'Brasileirão Série A',
-      casa: { nome: 'Flamengo', image_id: '120' },
-      fora: { nome: 'Palmeiras', image_id: '121' }, 
-      odds: { casa: '2.05', empate: '3.10', fora: '3.80' }
+  const [jogos, setJogos] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function buscarDadosReais() {
+      try {
+        const resposta = await fetch('http://localhost:3001/api/eventos-ao-vivo');
+        const resultado = await resposta.json();
+        
+        if (resultado.sucesso) {
+          setJogos(resultado.dados);
+        }
+      } catch (error) {
+        console.error("Erro ao conectar com o backend:", error);
+      } finally {
+        setLoading(false);
+      }
     }
-  ];
+    buscarDadosReais();
+  }, []);
 
+  // 1. Mostra a mensagem de carregamento
+  if (loading) return <div className="p-10 text-white text-center animate-pulse">Buscando os melhores jogos...</div>;
 
-  const gerarSigla = (nome: string) => {
-    const palavras = nome.split(' ');
-    if (palavras.length > 1) return (palavras[0][0] + palavras[1][0]).toUpperCase();
-    return nome.substring(0, 2).toUpperCase();
-  };
+  // 2. Verifica se a lista veio vazia
+  if (!jogos || jogos.length === 0) {
+    return (
+      <div className="bg-bg-card border border-border-color rounded-xl p-12 flex flex-col items-center justify-center text-center shadow-lg mb-6">
+        <div className="w-16 h-16 bg-bg-main rounded-full flex items-center justify-center mb-4 border border-border-color">
+          <span className="text-2xl text-text-secondary">⚽</span>
+        </div>
+        <h3 className="text-xl font-bold text-white mb-2">Sem partidas à vista</h3>
+        <p className="text-text-secondary text-base">
+          Não tem jogo perto de acontecer.
+        </p>
+        <p className="text-text-secondary text-sm mt-2 opacity-75">
+          Aguarde mais um pouco para acompanhar as ligas da América do Sul, Europa e Ásia.
+        </p>
+      </div>
+    );
+  }
 
+  
   return (
     <div className="bg-bg-card border border-border-color rounded-xl p-6 shadow-lg mb-6">
-      
-
-      <div className="flex justify-between items-center mb-6 border-b border-border-color pb-4">
-        <h2 className="font-semibold text-lg text-white flex items-center">
-          <svg className="w-5 h-5 mr-2 text-text-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-          Próximos Jogos
-        </h2>
-        <button className="text-sm text-text-accent hover:text-white transition-colors">
-          Ver todos
-        </button>
-      </div>
-
-
+      <h2 className="font-semibold text-lg text-white mb-6">Daqui a pouco tem</h2>
       <div className="space-y-3">
+
         {jogos.map((jogo) => (
-          <div key={jogo.id} className="flex flex-col md:flex-row items-center justify-between p-4 bg-bg-input rounded-xl border border-border-color hover:border-text-accent/50 transition-all group">
-
-            <div className="flex flex-col text-center md:text-left mb-3 md:mb-0 md:w-32 shrink-0">
+          <div key={jogo.id} className="flex flex-col md:flex-row items-center justify-between p-4 bg-bg-input rounded-xl border border-border-color transition-all hover:border-text-accent/50 group gap-4 overflow-hidden">
+            
+            {/* Bloco de Data e Campeonato */}
+            <div className="flex flex-col md:w-1/4 shrink-0 mb-3 md:mb-0">
               <span className="text-xs text-text-accent font-medium">{jogo.dataHora}</span>
-              <span className="text-[10px] text-text-secondary uppercase tracking-wider truncate">{jogo.campeonato}</span>
+              <span className="text-[10px] text-text-secondary uppercase truncate w-full" title={jogo.campeonato}>
+                {jogo.campeonato}
+              </span>
             </div>
 
-
-            <div className="flex items-center space-x-3 flex-1 justify-center w-full mb-4 md:mb-0">
-
-              <span className="text-sm font-medium text-text-primary text-right flex-1 truncate">{jogo.casa.nome}</span>
-              
-
-              <div className="flex items-center space-x-2 shrink-0">
-                <div className="w-8 h-8 rounded-full bg-bg-panel border border-border-color flex items-center justify-center overflow-hidden">
-                  <img 
-                    src={`https://assets.b365api.com/images/team/m/${jogo.casa.image_id}.png`} 
-                    alt={jogo.casa.nome}
-                    className="w-5 h-5 object-contain"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.parentElement!.innerHTML = `<span class="text-[9px] font-bold text-text-secondary">${gerarSigla(jogo.casa.nome)}</span>`;
-                    }}
-                  />
-                </div>
-                
-                <span className="text-[10px] text-text-secondary font-bold">VS</span>
-                
-                <div className="w-8 h-8 rounded-full bg-bg-panel border border-border-color flex items-center justify-center overflow-hidden">
-                  <img 
-                    src={`https://assets.b365api.com/images/team/m/${jogo.fora.image_id}.png`} 
-                    alt={jogo.fora.nome}
-                    className="w-5 h-5 object-contain"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.parentElement!.innerHTML = `<span class="text-[9px] font-bold text-text-secondary">${gerarSigla(jogo.fora.nome)}</span>`;
-                    }}
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm font-medium text-text-primary text-left flex-1 truncate">{jogo.fora.nome}</span>
+            {/* Bloco dos Times */}
+            <div className="flex items-center space-x-3 flex-1 justify-center min-w-0 mb-4 md:mb-0">
+              <span className="text-sm font-medium text-text-primary text-right w-1/3 truncate" title={jogo.casa.nome}>{jogo.casa.nome}</span>
+              <span className="text-[10px] text-text-secondary font-bold bg-bg-main px-2 py-1 rounded shrink-0">VS</span>
+              <span className="text-sm font-medium text-text-primary text-left w-1/3 truncate" title={jogo.fora.nome}>{jogo.fora.nome}</span>
             </div>
 
-            <div className="flex items-center space-x-2 w-full md:w-auto justify-center shrink-0">
-
-              <button className="flex flex-col items-center justify-center bg-bg-panel w-16 h-12 rounded border border-border-color hover:bg-text-green hover:border-text-green hover:text-bg-main transition-colors group/btn">
-                <span className="text-[10px] text-text-secondary group-hover/btn:text-bg-main/70">1</span>
-                <span className="text-sm font-bold text-white group-hover/btn:text-bg-main">{jogo.odds.casa}</span>
+            {/* Bloco das Odds */}
+            <div className="flex items-center space-x-2 shrink-0 md:w-1/4 justify-end">
+              <button className="bg-bg-panel w-14 h-10 rounded border border-border-color text-white font-bold text-xs hover:bg-text-accent/20 transition-colors shrink-0">
+                {jogo.odds.casa}
               </button>
-              
-
-              <button className="flex flex-col items-center justify-center bg-bg-panel w-16 h-12 rounded border border-border-color hover:bg-text-green hover:border-text-green hover:text-bg-main transition-colors group/btn">
-                <span className="text-[10px] text-text-secondary group-hover/btn:text-bg-main/70">X</span>
-                <span className="text-sm font-bold text-white group-hover/btn:text-bg-main">{jogo.odds.empate}</span>
+              <button className="bg-bg-panel w-14 h-10 rounded border border-border-color text-white font-bold text-xs hover:bg-text-accent/20 transition-colors shrink-0">
+                {jogo.odds.empate}
               </button>
-              
-  
-              <button className="flex flex-col items-center justify-center bg-bg-panel w-16 h-12 rounded border border-border-color hover:bg-text-green hover:border-text-green hover:text-bg-main transition-colors group/btn">
-                <span className="text-[10px] text-text-secondary group-hover/btn:text-bg-main/70">2</span>
-                <span className="text-sm font-bold text-white group-hover/btn:text-bg-main">{jogo.odds.fora}</span>
+              <button className="bg-bg-panel w-14 h-10 rounded border border-border-color text-white font-bold text-xs hover:bg-text-accent/20 transition-colors shrink-0">
+                {jogo.odds.fora}
               </button>
             </div>
-
+            
           </div>
         ))}
       </div>
