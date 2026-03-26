@@ -15,7 +15,6 @@ export default function Sidebar() {
   useEffect(() => {
     async function buscarLigas() {
       try {
-        // 🔥 Fazendo a chamada REAL para o seu Back-end
         const resposta = await fetch('http://localhost:3001/api/ligas-populares');
         const resultado = await resposta.json();
         
@@ -43,7 +42,6 @@ export default function Sidebar() {
         </h3>
         
         {loading ? (
-          // Skeleton de carregamento
           Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="flex items-center space-x-3 p-2 rounded-lg">
               <div className="w-6 h-6 rounded-full bg-bg-input animate-pulse shrink-0"></div>
@@ -51,7 +49,6 @@ export default function Sidebar() {
             </div>
           ))
         ) : (
-          // Dados reais vindos do Back-end
           ligas.map((liga) => (
             <div 
               key={liga.id} 
