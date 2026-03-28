@@ -42,7 +42,7 @@ A arquitetura do Front-end foi modularizada para facilitar a manutenção e a in
 Clone o repositório:
 
 Bash
-git clone [https://github.com/seu-utilizador/seu-repositorio.git](https://github.com/seu-utilizador/seu-repositorio.git)
+git clone https://github.com/EDSdatalab/edscript-frontend.git
 Entre na pasta do projeto:
 
 Bash
