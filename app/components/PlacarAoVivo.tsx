@@ -2,16 +2,16 @@
 
 import React from 'react';
 
+import Link from 'next/link';
+
 export default function PlacarAoVivo() {
   
   const jogo = {
     tempo: "78:20",
     timeCasa: "Sport Recife",
-    
     pathFotoCasa: "/sport.png", 
     golsCasa: 2,
     timeFora: "Santa Cruz",
-    
     pathFotoFora: "/santa.png",
     golsFora: 1,
     estadio: "Ilha do Retiro",
@@ -19,7 +19,6 @@ export default function PlacarAoVivo() {
     chutes: { casa: 14, fora: 9 }
   };
 
-  
   const gerarSigla = (nome: string) => {
     const palavras = nome.split(' ');
     if (palavras.length > 1) return (palavras[0][0] + palavras[1][0]).toUpperCase();
@@ -27,8 +26,12 @@ export default function PlacarAoVivo() {
   };
 
   return (
-    <div className="bg-bg-card border border-border-color rounded-xl p-6 shadow-lg mb-6">
-     
+
+    <Link 
+      href="/detalhes"
+      rel="noopener noreferrer"
+      className="block bg-bg-card border border-border-color rounded-xl p-6 shadow-lg mb-6 hover:border-text-accent/50 transition-colors cursor-pointer group"
+    >
       
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center space-x-2 bg-bg-main px-3 py-1 rounded-full border border-border-color">
@@ -42,18 +45,14 @@ export default function PlacarAoVivo() {
         </div>
       </div>
 
-      
       <div className="flex justify-between items-center mb-8 px-2 md:px-8">
-        
         
         <div className="flex flex-col items-center space-y-3 w-1/3">
           <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-bg-main flex items-center justify-center overflow-hidden shadow-md border border-border-color">
             <img 
-              
               src={jogo.pathFotoCasa} 
               alt={jogo.timeCasa}
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
-              
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.parentElement!.innerHTML = `<span class="text-xl md:text-2xl font-black text-text-secondary">${gerarSigla(jogo.timeCasa)}</span>`;
@@ -63,7 +62,6 @@ export default function PlacarAoVivo() {
           <span className="font-semibold text-sm md:text-lg text-center text-text-primary">{jogo.timeCasa}</span>
         </div>
 
-        
         <div className="flex items-center space-x-3 md:space-x-6 w-1/3 justify-center">
           <div className="text-4xl md:text-6xl font-black bg-bg-main text-white px-4 md:px-6 py-2 md:py-4 rounded-lg shadow-inner border border-border-color">
             {jogo.golsCasa}
@@ -74,11 +72,9 @@ export default function PlacarAoVivo() {
           </div>
         </div>
 
-        
         <div className="flex flex-col items-center space-y-3 w-1/3">
           <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-bg-main flex items-center justify-center overflow-hidden shadow-md border border-border-color">
             <img 
-              
               src={jogo.pathFotoFora} 
               alt={jogo.timeFora}
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
@@ -92,7 +88,6 @@ export default function PlacarAoVivo() {
         </div>
       </div>
 
-      
       <div className="border-t border-border-color pt-5 mt-2">
         <h4 className="text-text-secondary text-xs uppercase tracking-widest mb-4 text-center">Termômetro da Partida</h4>
         
@@ -110,7 +105,6 @@ export default function PlacarAoVivo() {
             </div>
           </div>
           
-          
           <div>
             <div className="flex justify-between text-xs mb-1.5">
               <span className="font-bold text-white">{jogo.chutes.casa}</span>
@@ -124,6 +118,6 @@ export default function PlacarAoVivo() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
